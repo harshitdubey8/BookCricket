@@ -4,6 +4,8 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 
 import HomeScreen from "../screens/HomeScreen";
+import PreMatchScreen from "../screens/PreMatchScreen";
+import TossScreen from "../screens/TossScreen";
 
 // 1) Guest Entry: Player 1 and Player 2 Names can be changed..
 // 2) Number of overs :  3, 5, 10
@@ -24,6 +26,8 @@ const CricketNavigator = () => {
       />
       <Stack.Navigator initialRouteName="HomeScreen" headerMode="none">
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
+        <Stack.Screen name="PreMatchScreen" component={PreMatchScreen} />
+        <Stack.Screen name="TossScreen" component={TossScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

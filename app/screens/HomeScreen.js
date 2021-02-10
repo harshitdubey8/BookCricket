@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import {
+  Alert,
   Dimensions,
   Image,
   KeyboardAvoidingView,
@@ -26,7 +27,14 @@ const HomeScreen = ({ navigation }) => {
   const dispatch = useDispatch();
 
   const playHandler = () => {
+    if (!player1 || !player2) {
+      Alert.alert("Game Warning!", "Player names can't be empty", [
+        { text: "Ok" },
+      ]);
+      return;
+    }
     dispatch(addPlayers({ player1, player2 }));
+    navigation.replace("PreMatchScreen");
   };
 
   return (

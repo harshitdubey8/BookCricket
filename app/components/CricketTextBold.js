@@ -2,8 +2,12 @@ import React from "react";
 import { StyleSheet, Text } from "react-native";
 import Colors from "../constants/Colors";
 
-const CricketTextBold = ({ style, children }) => {
-  return <Text style={[styles.cricketTextBold, style]}>{children}</Text>;
+const CricketTextBold = ({ style, children, ...rest }) => {
+  return (
+    <Text {...rest} style={[styles.cricketTextBold, style]}>
+      {children}
+    </Text>
+  );
 };
 
 export default CricketTextBold;
