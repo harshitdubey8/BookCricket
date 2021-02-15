@@ -18,7 +18,7 @@ import Teams from "../data/dummyData";
 
 const { width } = Dimensions.get("window");
 
-const TossScreen = () => {
+const TossScreen = ({ navigation }) => {
   const [toss, setToss] = useState(false);
   const playerNames = useSelector(selectPlayers);
   const overs = useSelector(selectOvers);
@@ -59,7 +59,7 @@ const TossScreen = () => {
         style={styles.topSectionText}
       >{`Overs: ${overs}, Players: ${players}`}</CricketTextBold>
       {isDecisionTaken ? (
-        <>
+        <View style={styles.middleSection}>
           <CricketTextBold style={styles.quesText}>
             {toss
               ? `${playerNames?.player1} has elected to ${
@@ -72,7 +72,7 @@ const TossScreen = () => {
           <View style={styles.teamsContainer}>
             <View style={styles.playersContainer}>
               <CricketTextBold style={styles.topSectionText}>
-                {playerNames.player1}'s Team
+                {playerNames?.player1}'s Team
               </CricketTextBold>
               {Teams[0].slice(0, players).map((player) => (
                 <CricketText key={player}>{player}</CricketText>
@@ -85,7 +85,7 @@ const TossScreen = () => {
               <CricketTextBold
                 style={[styles.playerTextRight, styles.topSectionText]}
               >
-                {playerNames.player2}'s Team
+                {playerNames?.player2}'s Team
               </CricketTextBold>
               {Teams[1].slice(0, players).map((player) => (
                 <CricketText key={player} style={styles.playerTextRight}>
@@ -94,9 +94,15 @@ const TossScreen = () => {
               ))}
             </View>
           </View>
-        </>
+          <CricketButton
+            style={{ ...styles.actionButton, ...styles.startGameButton }}
+            onButtonPress={() => navigation.replace("GameScreen")}
+          >
+            <CricketTextBold>Start Game</CricketTextBold>
+          </CricketButton>
+        </View>
       ) : (
-        <View>
+        <View style={styles.middleSection}>
           <CricketTextBold style={styles.quesText}>
             {toss ? playerNames?.player1 : playerNames?.player2} what would you
             like to do?
@@ -154,6 +160,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: "center",
   },
+  middleSection: {
+    width,
+    alignItems: "center",
+  },
   action: {
     width,
     height: 100,
@@ -165,6 +175,9 @@ const styles = StyleSheet.create({
     width: width * 0.26,
     height: 40,
     backgroundColor: Colors.secondary,
+  },
+  startGameButton: {
+    marginTop: 20,
   },
   teamsContainer: {
     width,
