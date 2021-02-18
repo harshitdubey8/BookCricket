@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import {
   Alert,
   Dimensions,
@@ -24,6 +24,7 @@ const { width, height } = Dimensions.get("window");
 const HomeScreen = ({ navigation }) => {
   const [player1, setPlayer1] = useState("");
   const [player2, setPlayer2] = useState("");
+  const playerInput2 = useRef(null);
   const dispatch = useDispatch();
 
   const playHandler = () => {
@@ -60,8 +61,10 @@ const HomeScreen = ({ navigation }) => {
             style={styles.playerInput}
             value={player1}
             onChangeText={(text) => setPlayer1(text)}
+            onSubmitEditing={() => playerInput2.current.focus()}
           />
           <TextInput
+            ref={playerInput2}
             placeholder="Player 2"
             placeholderTextColor="#888"
             style={styles.playerInput}

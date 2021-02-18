@@ -1,13 +1,15 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  playerNames: null,
+  overs: null,
+  numberOfPlayers: null,
+  currentPlayerBatting: null,
+};
+
 export const gameSlice = createSlice({
   name: "game",
-  initialState: {
-    playerNames: null,
-    overs: null,
-    numberOfPlayers: null,
-    currentPlayerBatting: null,
-  },
+  initialState,
   reducers: {
     addPlayers: (state, action) => {
       state.playerNames = action.payload;
@@ -27,6 +29,12 @@ export const gameSlice = createSlice({
     setCurrentPlayerBatting: (state, action) => {
       state.currentPlayerBatting = action.payload;
     },
+    resetGameState: (state) => {
+      state.playerNames = null;
+      state.overs = null;
+      state.numberOfPlayers = null;
+      state.currentPlayerBatting = null;
+    },
   },
 });
 
@@ -34,6 +42,7 @@ export const {
   addPlayers,
   setOvers,
   setCurrentPlayerBatting,
+  resetGameState,
 } = gameSlice.actions;
 
 export const selectPlayers = (state) => state.game.playerNames;
