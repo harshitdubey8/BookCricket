@@ -5,4 +5,6 @@ export default configureStore({
   reducer: {
     game: gameReducer,
   },
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({ immutableCheck: false, serializableCheck: false }),
 });

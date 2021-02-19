@@ -48,6 +48,13 @@ const GameScreen = ({ navigation }) => {
   }, [currentScore]);
 
   const resetGame = (score) => {
+    Alert.alert(
+      innings ? "Game Over" : "Innings Break",
+      `Total Score: ${totalScore + score}\nPress Ok to ${
+        innings ? "view game result" : "continue to second innings"
+      }`,
+      [{ text: "Ok" }]
+    );
     if (innings === 0) {
       setCurrentScore(0);
       setTotalScore(0);
@@ -78,21 +85,15 @@ const GameScreen = ({ navigation }) => {
         (matchResult[2] && totalScore + score > matchResult[2])
       ) {
         resetGame(score);
-        return;
       }
     }
 
     if (wickets + 1 === totalPlayers || overs === currentOvers) {
-      Alert.alert(
-        "Innings Break",
-        `Total Score: ${
-          totalScore + score
-        }\nPress Ok to continue to second innings`,
-        [{ text: "Ok" }]
-      );
       resetGame(score);
-      dispatch(setCurrentPlayerBatting(currentPlayerBatting === 1 ? 2 : 1));
-      return;
+      if (!innings) {
+        dispatch(setCurrentPlayerBatting(currentPlayerBatting === 1 ? 2 : 1));
+        return;
+      }
     }
 
     setCurrentScore(score);
@@ -151,14 +152,16 @@ const GameScreen = ({ navigation }) => {
           </View>
         </View>
       </View>
-      <CricketTextBold>{innings === 2 && winnerText}</CricketTextBold>
       {innings === 2 && (
-        <CricketButton
-          style={styles.scoreButton}
-          onButtonPress={resetGameHandler}
-        >
-          <CricketTextBold>RESET</CricketTextBold>
-        </CricketButton>
+        <View style={styles.summaryContainer}>
+          <CricketTextBold style={styles.title}>{winnerText}</CricketTextBold>
+          <CricketButton
+            style={styles.resetGameButton}
+            onButtonPress={resetGameHandler}
+          >
+            <CricketTextBold>RESET</CricketTextBold>
+          </CricketButton>
+        </View>
       )}
       <View style={styles.scoreContainer}>
         <CricketTextBold style={styles.scoreContainerText}>
@@ -220,8 +223,6 @@ const styles = StyleSheet.create({
     backgroundColor: "#333",
     justifyContent: "center",
     alignItems: "center",
-    borderWidth: 2,
-    borderColor: Colors.secondary,
   },
   teamScore: {
     width: "45%",
@@ -233,6 +234,19 @@ const styles = StyleSheet.create({
   },
   ballScore: {
     fontSize: 33,
+  },
+  summaryContainer: {
+    width,
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginTop: 20,
+    height: 90,
+  },
+  resetGameButton: {
+    width: width * 0.8,
+    height: 40,
+    borderWidth: 2,
+    borderColor: Colors.secondary,
   },
   scoreContainer: {
     position: "absolute",

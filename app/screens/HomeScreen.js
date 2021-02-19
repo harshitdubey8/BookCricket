@@ -14,7 +14,6 @@ import {
 import { useDispatch } from "react-redux";
 
 import CricketButton from "../components/CricketButton";
-import CricketText from "../components/CricketText";
 import CricketTextBold from "../components/CricketTextBold";
 import Colors from "../constants/Colors";
 import { addPlayers } from "../features/gameSlice";
@@ -44,7 +43,6 @@ const HomeScreen = ({ navigation }) => {
       behavior={Platform.OS === "ios" ? "padding" : ""}
     >
       <ScrollView>
-        <CricketText style={styles.title}>Welcome to Book Cricket</CricketText>
         <View style={styles.logoContainer}>
           <Image
             source={require("../assets/images/app-logo.png")}
@@ -95,7 +93,7 @@ const styles = StyleSheet.create({
   },
   logoContainer: {
     width,
-    height: height * 0.36,
+    height: height * 0.6,
     justifyContent: "flex-end",
     alignItems: "center",
   },
@@ -105,8 +103,8 @@ const styles = StyleSheet.create({
   },
   inputContainer: {
     width,
-    marginVertical: 20,
     alignItems: "center",
+    marginTop: -70,
   },
   inputTitle: {
     fontSize: 17,
