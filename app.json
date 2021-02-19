@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "BookCricket",
+    "description": "Play Cricket on the go!",
     "slug": "BookCricket",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -15,9 +16,13 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
+      "bundleIdentifier": "com.mohdsameer7408.bookCricket",
+      "buildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "package": "com.mohdsameer7408.bookCricket",
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./app/assets/images/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
